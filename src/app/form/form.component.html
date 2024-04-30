@@ -1,0 +1,41 @@
+<div class="container d-flex justify-content-center my-5">
+
+<form [formGroup]="signupForm"  (ngSubmit)="signupForm.status !== 'INVALID' && signup()">
+    <div class="mb-3">
+        <h5 class="mb-4">SignUp Form</h5>
+      <label for="Name" class="form-label">Full Name</label>
+      <input type="text" class="form-control" id="Name" formControlName="Fname" [ngClass]="{error : getControl('Fname')?.errors && getControl('Fname')?.touched}">
+      <div *ngIf="getControl('Fname')?.errors && getControl('Fname')?.touched">
+       <small class="text-danger" *ngIf="getControl('Fname')?.errors?.['required']">full name is required</small>
+       <small class="text-danger" *ngIf="getControl('Fname')?.errors?.['max-length']">only 32 characters allowed</small>
+
+    </div>
+    </div>
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="Email" formControlName="email" [ngClass]="{error : getControl('email')?.errors && getControl('email')?.touched}">
+        <div *ngIf="getControl('email')?.errors && getControl('email')?.touched">
+            <small class="text-danger" *ngIf="getControl('email')?.errors?.['required']">email is required</small>
+            <small class="text-danger" *ngIf="getControl('email')?.errors?.['max-length']">only 32 characters allowed</small>
+            <small class="text-danger" *ngIf="getControl('email')?.errors?.['pattern']">please enter a valid email</small>
+        </div>
+    </div>
+      <div class="mb-3">
+        <label for="Password" class="form-label">Password</label>
+        <input type="Password" class="form-control" id="Password" formControlName="Password" [ngClass]="{error : getControl('Password')?.errors && getControl('Password')?.touched}">
+        <div *ngIf="getControl('Password')?.errors && getControl('Password')?.touched">
+            <small class="text-danger" *ngIf="getControl('Password')?.errors?.['required']">Password is required</small>
+            <small class="text-danger" *ngIf="getControl('Password')?.errors?.['invalidPassword']">Password must contain at least one number, one uppercase letter, one lowercase letter, and be 8 characters or less</small>
+        </div>
+    </div>
+    <div class="mb-3">
+      <label for="Confirm" class="form-label">Confirm Password</label>
+      <input type="password" class="form-control" id="Confirm" formControlName="confirm" [ngClass]="{error : getControl('confirm')?.errors && getControl('confirm')?.touched}">
+      <div *ngIf="getControl('confirm')?.errors && getControl('confirm')?.touched">
+        <small class="text-danger" *ngIf="getControl('confirm')?.errors?.['required']">confirmPassword is required</small>
+        <small class="text-danger" *ngIf="getControl('confirm')?.errors?.['invalidPassword']">Password must contain at least one number, one uppercase letter, one lowercase letter, and be 8 characters or less</small>
+    </div>
+    </div>
+    <button type="submit" [disabled]="signupForm.status === 'INVALID'" class="btn btn-primary">Submit</button>
+  </form>
+</div>
